@@ -7,13 +7,23 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Pomodoro</h1>
-    <h2 id="display"></h2>
-    <input type="text" id="session">
-    <input type="text" id="break"><br><br>
-    <button id="start">Start</button>
-    <button id="stop">Stop</button>
-    <script src="script.js"></script>
+    <div class="container">
+      <h1>Pomodoro</h1>
+      <h2 id="display"></h2>
+      <div class="input-group">
+        <label for="session">Session :</label>
+        <input type="text" id="session" required>
+      </div>
+      <div class="input-group">
+        <label for="break">Break :</label>
+        <input type="text" id="break" required>
+      </div>
+      <div class="btns">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+      </div>
+    </div>
+      <script src="script.js"></script>
   </body>
   </body>
 </html>

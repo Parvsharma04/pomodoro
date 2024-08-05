@@ -1,6 +1,8 @@
 let session = document.getElementById("session");
 let offTime = document.getElementById("break");
 let state = document.querySelector("h1");
+let root = document.querySelector("body");
+
 let startBtn = document.getElementById("start");
 let stopBtn = document.getElementById("stop");
 
@@ -12,14 +14,12 @@ stopBtn.addEventListener("click", stopTimer);
 let timeInSec;
 let isFocused = true;
 let intervalId;
-let sessionCount = 1;
-let breakCount = 1;
+let sessionCount = 0;
+let breakCount = 0;
 
 function startTimer() {
-  if (isFocused)
-    state.innerText = "Session - " + sessionCount++;
-  else
-    state.innerText = "Break - " + breakCount++;
+  if (isFocused) state.innerText = "Session - " + ++sessionCount;
+  else state.innerText = "Break - " + ++breakCount;
 
   timeInSec = (isFocused ? session.value : offTime.value) * 60;
   intervalId = setInterval(() => {
@@ -43,9 +43,30 @@ function showTime(time) {
 function stopTimer() {
   clearInterval(intervalId);
 
-  showPopUp()
+  showPopUp();
 }
 
+let results = document.createElement("div");
+let div = document.createElement("div");
+div.className = "blur";
+results.className = "result";
+function showPopUp() {
+  results.innerHTML = `<h4>Worked : ${
+    sessionCount * session.value
+  } minutes</h4> <h4>Rested : ${
+    breakCount * offTime.value
+  } minutes</h4><button id="restart">Restart</button>`;
+  root.append(results);
+  let restart = document.querySelector("#restart");
+  restart.addEventListener("click", removeBox);
+  root.append(div);
+}
 
-
-function popUp()
+function removeBox() {
+  results.remove();
+  div.remove();
+  display.innerText = ""
+  session.value = ""
+  offTime.value = ""
+  state.innerText = "Pomodoro"
+}
